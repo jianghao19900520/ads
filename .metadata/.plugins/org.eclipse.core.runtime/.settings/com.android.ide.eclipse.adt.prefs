@@ -1,0 +1,6 @@
+com.android.ide.eclipse.adt.autoPickTarget=false
+com.android.ide.eclipse.adt.customDebugKeyStore=D\:\\workspace\\MagicWifi_V2.7.1.0_video_\u89C6\u9891\u4E09\u671F\\keystore\\debug.keystore
+com.android.ide.eclipse.adt.fixLegacyEditors=1
+com.android.ide.eclipse.adt.sdk=D\:\\adt-bundle-windows-x86_64-20131030\\sdk
+com.android.ide.eclipse.adt.xmlEditor=true
+eclipse.preferences.version=1

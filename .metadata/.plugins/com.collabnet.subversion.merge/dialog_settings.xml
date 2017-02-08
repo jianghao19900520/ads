@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="true" key="MergeWizardStandardPage.selectRevisions"/>
+	<item value="647" key="MergeWizardRevisionsPageWeights0"/>
+	<item value="/trunk/Wifi_V2.0.0/MagicWifi_V2.7.1.0_video_%E4%B8%89%E6%9C%9F,/trunk/Wifi_V2.0.0/MagicWifi_V2.7.1.0_video_%E4%B8%89%E6%9C%9F" key="mergeFromUrls_http://192.168.1.243:18080/svn/swr-android/branches/MagicWifi_V2.7.1.0_video_3_borui"/>
+	<item value="118" key="MergeWizardRevisionsPageWeights1"/>
+	<item value="234" key="MergeWizardRevisionsPageWeights2"/>
+	<item value="500" key="MergeWizardRevisionsPageWeightsHorizontal1"/>
+	<item value="/trunk/Wifi_V2.0.0/MagicWifi_V2.7.1.0_video_%E4%B8%89%E6%9C%9F,/trunk/Wifi_V2.0.0/MagicWifi_V2.7.1.0_video_%E4%B8%89%E6%9C%9F" key="mergeFromUrls_http://192.168.1.243:18080/svn/swr-android/branches/MagicWifi_V2.7.1.0_video_3_qimei"/>
+	<item value="500" key="MergeWizardRevisionsPageWeightsHorizontal0"/>
+</section>

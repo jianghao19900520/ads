@@ -1,0 +1,27 @@
+:normalEnd:
+project: \MagicWifi_V2.7.1.0_video_视频三期
+fromUrl: http://192.168.1.243:18080/svn/swr-android/trunk/Wifi_V2.0.0/MagicWifi_V2.7.1.0_video_%E4%B8%89%E6%9C%9F
+toUrl: http://192.168.1.243:18080/svn/swr-android/trunk/Wifi_V2.0.0/MagicWifi_V2.7.1.0_video_%E4%B8%89%E6%9C%9F
+revisionRanges: 1539-1580
+force: false
+recurse: false
+ignore: false
+depth: 0
+revisions: 1539-1580
+Summary result: type: 0 category: Deleted number: 2
+Summary result: type: 0 category: Updated number: 5
+Summary result: type: 1 category: Updated number: 1
+
+workspaceUrl: http://192.168.1.243:18080/svn/swr-android/branches/MagicWifi_V2.7.1.0_video_3_borui
+workspaceRevision: 1580
+lowerRevision: 1539
+upperRevision: 1580
+merge -r 1539:1580 http://192.168.1.243:18080/svn/swr-android/trunk/Wifi_V2.0.0/MagicWifi_V2.7.1.0_video_%E4%B8%89%E6%9C%9F D:/workspace/MagicWifi_V2.7.1.0_video_视频三期
+Message: 1 U           D:/workspace/MagicWifi_V2.7.1.0_video_视频三期/src/com/magicwifi/activity/BootActivity.java
+Message: 1 U           D:/workspace/MagicWifi_V2.7.1.0_video_视频三期/src/com/magicwifi/activity/BaseActivity.java
+Message: 1 U           D:/workspace/MagicWifi_V2.7.1.0_video_视频三期/src/com/magicwifi/activity/HomeActivity.java
+Message: 1 U           D:/workspace/MagicWifi_V2.7.1.0_video_视频三期/src/com/utils/WifiApplication.java
+Message: 1 D           D:/workspace/MagicWifi_V2.7.1.0_video_视频三期/libs/pushservice-3.2.0.jar
+Message: 1 D           D:/workspace/MagicWifi_V2.7.1.0_video_视频三期/libs/com.umeng.message.lib_v2.5.0.jar
+Message: 1 U           D:/workspace/MagicWifi_V2.7.1.0_video_视频三期/res/layout/activity_thirdparty_pay.xml
+Message: 3   U         D:/workspace/MagicWifi_V2.7.1.0_video_视频三期

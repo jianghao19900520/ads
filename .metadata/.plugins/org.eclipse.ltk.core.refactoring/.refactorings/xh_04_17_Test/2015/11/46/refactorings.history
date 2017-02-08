@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ImageAdapter.java&apos; to &apos;MagicWifi_V2.7.1.0_video_视频三期/src/com.magicwifi.activity&apos;&#x0D;&#x0A;- Original project: &apos;xh_04_17_Test&apos;&#x0D;&#x0A;- Destination element: &apos;MagicWifi_V2.7.1.0_video_视频三期/src/com.magicwifi.activity&apos;&#x0D;&#x0A;- Original element: &apos;xiaohang.zhimeng.ImageAdapter.java&apos;" description="Copy compilation unit" destination="=MagicWifi_V2.7.1.0_video_视频三期/src&lt;com.magicwifi.activity" element1="/src&lt;xiaohang.zhimeng{ImageAdapter.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1447210552104" units="1" version="1.0"/>
+</session>

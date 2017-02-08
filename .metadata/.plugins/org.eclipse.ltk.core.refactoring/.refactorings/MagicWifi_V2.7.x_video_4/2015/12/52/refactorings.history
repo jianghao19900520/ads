@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 4 elements to &apos;drawable&apos;&#x0D;&#x0A;- Original project: &apos;MagicWifi_V2.7.x_video_4&apos;&#x0D;&#x0A;- Destination element: &apos;drawable&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     tv_player_text_expire.xml&#x0D;&#x0A;     tv_player_right_btn_expire.xml&#x0D;&#x0A;     tv_player_right_btn_expire_normal.xml&#x0D;&#x0A;     tv_player_right_btn_expire_press.xml" description="Copy files" element1="res/drawable/tv_player_text_expire.xml" element2="res/drawable/tv_player_right_btn_expire.xml" element3="res/drawable/tv_player_right_btn_expire_normal.xml" element4="res/drawable/tv_player_right_btn_expire_press.xml" files="4" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1450748917338" target="/MagicWifi_V2.7.2.0/res/drawable" units="0" version="1.0"/>
+</session>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ads.library" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
+
+    <application>
+
+        <!-- adlist页面start -->
+        <activity
+            android:name="com.ads.library.RandomAdActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name="com.ads.library.ShakeAdActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name="com.ads.library.AdListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <!-- adlist页面end -->
+
+
+        <!-- 百度广告start -->
+        <activity
+            android:name="com.baidu.mobads.AppActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.baidu.mobad.feeds.BaiduActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation" />
+        <!-- 百度广告end -->
+
+
+        <!-- 广点通广告start -->
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false" />
+
+        <activity
+            android:name="com.qq.e.ads.ADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+        <!-- 广点通广告end -->
+    </application>
+
+</manifest>

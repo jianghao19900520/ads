@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="220" key="HistoryTableProvider.SVNHistoryPage.作者"/>
+	<item value="236" key="SetCommitPropertiesDialog.size.x"/>
+	<item value="295" key="SetCommitPropertiesDialog.size.y"/>
+	<item value="202" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.作者"/>
+	<item value="101" key="HistoryTableProvider.revisionsBlock.修订"/>
+	<item value="802" key="DifferencesDialog.size.x"/>
+	<item value="503" key="HistoryTableProvider.revisions.注释"/>
+	<item value="525" key="AnnotateDialog.size.x"/>
+	<item value="444" key="AnnotateDialog.size.y"/>
+	<item value="416" key="DifferencesDialog.size.y"/>
+	<item value="606" key="SwitchDialogWithConflictHandling.size.x"/>
+	<item value="860" key="SwitchDialogWithConflictHandling.size.y"/>
+	<item value="298" key="HistoryTableProvider.revisions.日期"/>
+	<item value="http://192.168.1.243:18080/svn/swr-android" key="UrlCombo.MagicWifi_V2.7.2.0.0"/>
+	<item value="0" key="CommitDialog.location.y"/>
+	<item value="0" key="CommitDialog.location.x"/>
+	<item value="2" key="ResourceSelectionTree.mode"/>
+	<item value="119" key="MarkResolvedDialog.location.y"/>
+	<item value="538" key="RevertDialog.location.x"/>
+	<item value="527" key="MarkResolvedDialog.location.x"/>
+	<item value="546" key="MarkResolvedDialog.size.x"/>
+	<item value="101" key="HistoryTableProvider.revisions.修订"/>
+	<item value="467" key="MarkResolvedDialog.size.y"/>
+	<item value="134" key="RevertDialog.location.y"/>
+	<item value="503" key="HistoryTableProvider.revisionsBlock.注释"/>
+	<item value="252" key="HistoryTableProvider.revisionsBlock.日期"/>
+	<item value="234" key="SetCommitPropertiesDialog.location.y"/>
+	<item value="682" key="SetCommitPropertiesDialog.location.x"/>
+	<item value="110" key="HistoryTableProvider.SVNHistoryPage.修订"/>
+	<item value="552" key="ChooseUrlDialog.location.x"/>
+	<item value="180" key="ChooseUrlDialog.location.y"/>
+	<item value="branches" key="DirectorySelectionPage.lastParent_http://192.168.1.243:18080/svn/swr-android"/>
+	<item value="283" key="ExportRemoteFolderDialog.location.x"/>
+	<item value="153" key="DifferencesDialog.location.y"/>
+	<item value="252" key="ExportRemoteFolderDialog.location.y"/>
+	<item value="http://192.168.1.243:18080/svn/swr-android/branches/MagicWifi_V2.7.1.0_video_3_borui" key="UrlCombo.MagicWifi_V2.7.1.0_video_视频三期.1"/>
+	<item value="http://192.168.1.243:18080/svn/swr-android/branches/MagicWifi_V2.7.1.0_video_3_qimei" key="UrlCombo.MagicWifi_V2.7.1.0_video_视频三期.0"/>
+	<item value="550" key="HistoryTableProvider.SVNHistoryPage.注释"/>
+	<item value="102" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.修订"/>
+	<item value="444" key="RevertDialog.size.y"/>
+	<item value="275" key="HistoryTableProvider.SVNHistoryPage.日期"/>
+	<item value="525" key="RevertDialog.size.x"/>
+	<item value="134" key="AnnotateDialog.location.y"/>
+	<item value="538" key="AnnotateDialog.location.x"/>
+	<item value="399" key="DifferencesDialog.location.x"/>
+	<item value="201" key="HistoryTableProvider.revisions.作者"/>
+	<item value="500" key="CommitDialog.weights.0"/>
+	<item value="500" key="CommitDialog.weights.1"/>
+	<item value="860" key="CommitDialog.size.y"/>
+	<item value="1600" key="CommitDialog.size.x"/>
+	<item value="252" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.日期"/>
+	<item value="http://192.168.1.243:18080/svn/swr-android/branches/MagicWifi_V2.7.1.0_video_3_qimei" key="UrlCombo.MagicWifi_V2.7.1.0_video_3.0"/>
+	<item value="http://192.168.1.243:18080/svn/swr-android/branches/MagicWifi_V2.7.1.0_video_3_borui" key="UrlCombo.MagicWifi_V2.7.1.0_video_3.1"/>
+	<item value="http://192.168.1.243:18080/svn/swr-android/trunk/Wifi_V2.0.0/MagicWifi_V2.7.1.0_video_%E4%B8%89%E6%9C%9F" key="UrlCombo.MagicWifi_V2.7.1.0_video_3.2"/>
+	<item value="1034" key="ExportRemoteFolderDialog.size.x"/>
+	<item value="497" key="ChooseUrlDialog.size.x"/>
+	<item value="505" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.注释"/>
+	<item value="268" key="ExportRemoteFolderDialog.size.y"/>
+	<item value="376" key="ChooseUrlDialog.size.y"/>
+	<item value="201" key="HistoryTableProvider.revisionsBlock.作者"/>
+	<item value="http://192.168.1.243:18080/svn/swr-android" key="RepositorySelectionPage.lastRepository"/>
+	<item value="0" key="SwitchDialogWithConflictHandling.location.y"/>
+	<item value="497" key="SwitchDialogWithConflictHandling.location.x"/>
+	<section name="CommitWizard">
+		<item value="500" key="VWeight2"/>
+		<item value="350" key="HWeight1"/>
+		<item value="650" key="HWeight2"/>
+		<item value="500" key="VWeight1"/>
+		<item value="true" key="ShowCompare"/>
+	</section>
+	<section name="IgnoreResourcesDialog">
+		<item value="0" key="Action"/>
+	</section>
+	<section name="NewLocationWizard">
+		<list key="ConfigurationWizardMainPage.STORE_URL_ID">
+			<item value="http://192.168.1.243:18080/svn/swr-android/branches/MagicWifi_V2.7.2.0_zhuandou_5_nanchong"/>
+		</list>
+	</section>
+</section>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shake_red_bg">
+
+        <ImageView
+            android:id="@+id/shake_dialog_delete_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shake_tk_delete_noraml"
+            android:layout_alignParentRight="true"/>
+
+        <ImageView
+            android:id="@+id/shake_dialog_ad_iv"
+            android:layout_width="192dp"
+            android:layout_height="108dp"
+            android:layout_centerHorizontal="true"
+            android:background="#ffffff"
+            android:scaleType="fitXY"
+            android:layout_marginTop="50dp"/>
+
+        <ImageView
+            android:layout_width="192dp"
+            android:layout_height="108dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shake_dialog_ad_bg_top"
+            android:scaleType="fitXY"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:id="@+id/shake_dialog_name_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="180dp"
+            android:text="5灵豆"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/shake_dialog_des_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="220dp"
+            android:text="亲，手气不错，建议领取！"
+            android:textColor="#ffffff"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/shake_dialog_get_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="250dp"
+            android:src="@drawable/yaoyiyao_main_get"/>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;StartAdActivity.java&apos; to &apos;MagicWifi_V2.6.4.0_video_光明光基地/src/com.magicwifi.activity&apos;&#x0D;&#x0A;- Original project: &apos;MagicWifi_V2.6.1.x&apos;&#x0D;&#x0A;- Destination element: &apos;MagicWifi_V2.6.4.0_video_光明光基地/src/com.magicwifi.activity&apos;&#x0D;&#x0A;- Original element: &apos;com.magicwifi.activity.StartAdActivity.java&apos;" description="Copy compilation unit" destination="=MagicWifi_V2.6.4.0_video_光明光基地/src&lt;com.magicwifi.activity" element1="/src&lt;com.magicwifi.activity{StartAdActivity.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1446516673097" units="1" version="1.0"/>
+</session>

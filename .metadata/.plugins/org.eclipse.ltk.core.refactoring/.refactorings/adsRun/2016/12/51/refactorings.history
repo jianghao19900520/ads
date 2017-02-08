@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;baiduRunTest/src/com.example.baiduruntest&apos;&#x0D;&#x0A;- Original project: &apos;adsRun&apos;&#x0D;&#x0A;- Destination element: &apos;baiduRunTest/src/com.example.baiduruntest&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     com.example.adsrun.AdsLinkNode.java&#x0D;&#x0A;     com.example.adsrun.MWebClient.java" description="Copy compilation units" destination="=baiduRunTest/src&lt;com.example.baiduruntest" element1="/src&lt;com.example.adsrun{AdsLinkNode.java" element2="/src&lt;com.example.adsrun{MWebClient.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1481694204242" units="2" version="1.0"/>
+</session>

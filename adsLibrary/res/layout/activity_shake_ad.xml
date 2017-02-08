@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#FE9B41" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="摇一摇"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/shake_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/title_back_black"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ads_shake_bg">
+
+        <ImageView
+            android:layout_width="290dp"
+            android:layout_height="81dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/yaoyiyao_main_title"/>
+
+        <ImageView
+            android:id="@+id/shake_center_iv"
+            android:layout_width="192dp"
+            android:layout_height="192dp"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/yaoyiyao_main_logo"/>
+
+        <ImageView
+            android:id="@+id/shake_help_img"
+            android:layout_width="71dp"
+            android:layout_height="68dp"
+            android:scaleType="fitXY"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/yaoyiyao_main_help"
+            android:layout_marginBottom="40dp"/>
+
+        <ImageView
+            android:id="@+id/shake_dialog_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#B0000000"
+            android:visibility="gone"/>
+
+        <include
+            android:id="@+id/geting_anim_ly"
+            layout="@layout/geting_anim_ly"
+            android:visibility="invisible" />
+
+        <include
+            android:id="@+id/getinfo_token_empty_ly"
+            layout="@layout/getinfo_token_empty_ly"
+            android:visibility="invisible" />
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

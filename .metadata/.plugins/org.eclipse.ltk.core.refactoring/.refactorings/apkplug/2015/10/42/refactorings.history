@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move source folder &apos;osgi2.8.0.jar&apos; to &apos;apkplug&apos;&#x0D;&#x0A;- Original project: &apos;apkplug&apos;&#x0D;&#x0A;- Destination element: &apos;apkplug&apos;&#x0D;&#x0A;- Original element: &apos;apkplug/libs/osgi2.8.0.jar&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move source folder" destination="=apkplug" element1="/libs\/osgi2.8.0.jar" flags="6" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveRoots" roots="1" stamp="1444978630462" version="1.0"/>
+</session>

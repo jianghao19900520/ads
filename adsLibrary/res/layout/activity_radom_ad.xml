@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#ffffff" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="挖矿"
+            android:textColor="#3cc6f0"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/random_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/title_back_black" />
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/getldbyad_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fdfefa"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/adlist_wk_title_bg" />
+
+            <ListView
+                android:id="@+id/getldbyad_listview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="17dp"
+                android:divider="#ffffff"
+                android:dividerHeight="17dp" >
+            </ListView>
+
+            <RelativeLayout
+                android:id="@+id/getldbyad_listview_again"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/random_bottom_bg_selector"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="再来一发"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/geting_anim_ly"
+            layout="@layout/geting_anim_ly"
+            android:visibility="invisible" />
+
+        <include
+            android:id="@+id/getinfo_token_empty_ly"
+            layout="@layout/getinfo_token_empty_ly"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/getldbyad_bg_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/getldbyad_bg_2"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/getldbyad_listview_start_rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/getldbyad_bg_1" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

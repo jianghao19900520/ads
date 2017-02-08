@@ -1,0 +1,721 @@
+package com.magicwifi.activity;
+
+import hh.jj.kk.DynamicSdkManager;
+import hh.jj.kk.OWManager;
+import hh.jj.kk.diy.DiyOfferWallManager;
+import hh.jj.kk.listener.IPointsListener;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.annotation.SuppressLint;
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.NetworkInfo;
+import android.net.NetworkInfo.DetailedState;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
+import android.text.Html;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.webkit.ValueCallback;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Toast;
+import cn.com.magicwifi.R;
+import cn.jpush.android.api.JPushInterface;
+
+import com.magicwifi.common.GlobalData;
+import com.magicwifi.database.column.PreferencesColum;
+import com.magicwifi.dialog.CustomLdDialog;
+import com.magicwifi.dialog.RegSecDialog;
+import com.magicwifi.fragment.BaseFragment;
+import com.magicwifi.fragment.ForumFragment.OnFragmentForumListener;
+import com.magicwifi.fragment.HotWiFiFragment;
+import com.magicwifi.fragment.HotWiFiFragment.OnFragmentHostListener;
+import com.magicwifi.fragment.MineSpaceFragment;
+import com.magicwifi.fragment.RecommendFragment;
+import com.magicwifi.fragment.VideoFragment;
+import com.magicwifi.node.UiResultCode;
+import com.magicwifi.node.WebviewNode;
+import com.magicwifi.protocol.ItfGetCfgInfo;
+import com.magicwifi.protocol.ItfPushCheck;
+import com.umeng.analytics.MobclickAgent;
+import com.utils.ActivityUtil;
+import com.utils.CFG;
+import com.utils.CallBackInterface;
+import com.utils.DateUtil;
+import com.utils.HandlerWorkInterface;
+import com.utils.LogUtil;
+import com.utils.NetUtil;
+import com.utils.NumberUtil;
+import com.utils.PreferencesUtil;
+import com.utils.ReadFile;
+import com.utils.StringUtil;
+import com.utils.ToastUtil;
+import com.utils.WifiApplication;
+import com.utils.WifiUtil;
+
+public class HomeActivity extends BaseActivity implements OnClickListener, OnFragmentHostListener, OnFragmentForumListener, IPointsListener
+{
+
+	// private final int MSG_TYPE_ADS_POP_REQ = RetMsgType.MSG_TYPE_UI_MIN+1;
+	private Context mContext;
+	private RadioGroup main_radiogroup;
+	private FragmentManager fm;
+	private FragmentTransaction ft;
+	private BroadcastReceiver receiver;
+	private ValueCallback<Uri> mUploadMessage;
+	private int mExitCnt;
+	private Toast mMoveBackToast;
+	private ImageView tab_download_alarm;
+
+	private int currentTab = -1;
+	private BaseFragment currentFragment;
+	private String registration;
+	private Timer timer;
+	private TimerTask timerTask;
+	private ItfPushCheck itfPushCheck;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.home_activity);
+
+		mExitCnt = 0;
+		mContext = this;
+		mGetCfgInfoFlag = false;
+		int toflag = getIntent().getIntExtra("toFrag", 1);
+		initViews(toflag);
+		initJPush();
+		initData();
+	}
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		mUpdateFlag = false;
+		initHandler();
+		initDetailBroadcast();
+		showRegisterTip();
+		setDwRadioAlarm();
+	}
+
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+
+		if (mHandler != null)
+		{
+			mHandler = null;
+		}
+		if (receiver != null)
+		{
+			WifiApplication.getInstance().unregisterReceiver(receiver);
+			receiver = null;
+		}
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+		deinitData();
+		if (timer != null) timer.cancel();
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+	}
+
+	private void initHandler()
+	{
+		if (mHandler == null)
+		{
+			mHandler = new Handler(Looper.getMainLooper());
+		}
+	}
+
+	private boolean mUpdateFlag = false;
+
+	// 注册广播接收，用于监听用户状态改变广播
+	private void initDetailBroadcast()
+	{
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(GlobalData.CHECK_UPDATE);
+		filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+		filter.setPriority(1000);
+		receiver = new BroadcastReceiver()
+		{
+			public void onReceive(Context context, final Intent intent)
+			{
+				doWork(new HandlerWorkInterface()
+				{
+					public void onFinish()
+					{
+						String action = intent.getAction();
+						if (GlobalData.CHECK_UPDATE.equals(action))
+						{
+							checkVersionUpdate(true, null);
+						}
+						else if (GlobalData.FRESH_DW_ALARM.equals(action))
+						{
+							setDwRadioAlarm();
+						}
+						else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action))
+						{// 提示连接状态
+							DetailedState state = ((NetworkInfo) intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO)).getDetailedState();
+							if (DetailedState.CONNECTED == state)
+							{
+								String ssid = WifiUtil.getInstance().getConnectSsid();
+								if (!StringUtil.isEmpty(ssid) && NetUtil.checkNetWorkWiFi() && WifiUtil.getInstance().ssidMatch(ssid))
+								{
+									getCfgInfoReq();
+									if (!mUpdateFlag)
+									{
+										mUpdateFlag = true;
+										checkVersionUpdate(false, null);
+									}
+								}
+							}
+						}
+					}
+				});
+			}
+		};
+		WifiApplication.getInstance().registerReceiver(receiver, filter);
+	}
+
+	public void initViews(final int toflag)
+	{
+		main_radiogroup = (RadioGroup) this.findViewById(R.id.main_radiogroup);
+		tab_download_alarm = (ImageView) this.findViewById(R.id.tab_download_alarm);
+		fm = getSupportFragmentManager();
+		main_radiogroup.setOnCheckedChangeListener(new OnCheckedChangeListener()
+		{
+			@SuppressLint("ResourceAsColor")
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId)
+			{
+				switch (checkedId)
+				{
+				case R.id.tab_search_wifi:
+					initTab(0);
+					break;
+				case R.id.tab_forum_bbs:
+					initTab(1);
+					break;
+				case R.id.tab_download:
+					initTab(2);
+					break;
+				case R.id.tab_mine_space:
+					initTab(3);
+					break;
+				}
+			}
+		});
+		((RadioButton) (main_radiogroup.findViewById(R.id.tab_search_wifi))).setOnClickListener(this);
+		((RadioButton) (main_radiogroup.findViewById(R.id.tab_download))).setOnClickListener(this);
+		((RadioButton) (main_radiogroup.findViewById(R.id.tab_forum_bbs))).setOnClickListener(this);
+		((RadioButton) (main_radiogroup.findViewById(R.id.tab_mine_space))).setOnClickListener(this);
+
+		if (toflag == 1)
+		{
+			initTab(0);
+		}
+		else if (toflag == 2)
+		{
+			onToOtherFragment(2, false);
+		}
+		else if (toflag == 3)
+		{
+			new Handler(getMainLooper()).postDelayed(new Runnable()
+			{
+
+				@Override
+				public void run()
+				{
+					ActivityUtil.startActivity(mContext, StartAdActivity.class);
+				}
+			}, 100);
+			initTab(0);
+		}
+		else if (toflag == 10)
+		{
+			new Handler(getMainLooper()).postDelayed(new Runnable()
+			{
+
+				@Override
+				public void run()
+				{
+					ActivityUtil.startActivity(mContext, LottoActivity.class);
+				}
+			}, 100);
+			initTab(0);
+		}
+		else if (toflag == 11)
+		{
+			new Handler(getMainLooper()).postDelayed(new Runnable()
+			{
+
+				@Override
+				public void run()
+				{
+					ActivityUtil.startActivity(mContext, LoginActivity.class);
+				}
+			}, 100);
+			initTab(0);
+		}
+		else
+		{
+			initTab(0);
+		}
+	}
+
+	private void initTab(int tab)
+	{
+		if (currentTab == tab) { return; }
+		currentTab = tab;
+		switch (tab)
+		{
+		case 0:
+		{
+			ft = fm.beginTransaction();
+			currentFragment = new HotWiFiFragment();
+			ft.replace(R.id.frame_container, currentFragment);
+			ft.commit();
+		}
+			break;
+		case 1:
+		{
+			ft = fm.beginTransaction();
+			// currentFragment = new ForumFragment();
+			currentFragment = new VideoFragment();
+			ft.replace(R.id.frame_container, currentFragment);
+			ft.commit();
+		}
+			break;
+		case 2:
+		{
+			ft = fm.beginTransaction();
+			currentFragment = new RecommendFragment();
+			ft.replace(R.id.frame_container, currentFragment);
+			ft.commit();
+		}
+			break;
+
+		case 3:
+		{
+			ft = fm.beginTransaction();
+			currentFragment = new MineSpaceFragment();
+			ft.replace(R.id.frame_container, currentFragment);
+			ft.commit();
+		}
+			break;
+		}
+	}
+
+	private void setDwRadioAlarm()
+	{
+		String currentDay = DateUtil.getDateString(System.currentTimeMillis(), DateUtil.PATTERN_YMD);
+		String enterLotty = PreferencesUtil.getInstance().getString("ENTER_LOTTY");
+		String hasCompleteTask = PreferencesUtil.getInstance().getString("HAS_COMPLETE_TASK");
+		if (!StringUtil.isEmpty(enterLotty) && !StringUtil.isEmpty(hasCompleteTask) && currentDay.equals(enterLotty) && currentDay.equals(hasCompleteTask))
+		{
+			if (tab_download_alarm != null) tab_download_alarm.setVisibility(View.GONE);
+		}
+		else
+		{
+			if (tab_download_alarm != null) tab_download_alarm.setVisibility(View.VISIBLE);
+		}
+
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if (mHandler == null) { return false; }
+		switch (keyCode)
+		{
+		case KeyEvent.KEYCODE_BACK:
+		{
+
+			boolean flag = false;
+			if (currentFragment != null)
+			{
+				flag = currentFragment.onKeyDown(keyCode, event);
+			}
+			if (flag) { return true; }
+			if (1 == ++mExitCnt)
+			{
+				String token = ReadFile.getInstance().getKeyValue(PreferencesColum.TOKEN);
+				String accountId = ReadFile.getInstance().getKeyValue(PreferencesColum.ACCOUNTID);
+				int balance = PreferencesUtil.getInstance().getInt(PreferencesColum.BANLANCE);
+				if (!StringUtil.isEmpty(token) && !StringUtil.isEmpty(accountId) && balance <= CFG.CONSUME_DAY_NEDD_LD)
+				{
+					StringBuffer msgTip = new StringBuffer();
+
+					msgTip.append("<font color='#000000'>" + getString(R.string.exit_app_ld_less_tip1) + "</font><br/>");
+					msgTip.append("<font color='#000000'>" + getString(R.string.exit_app_ld_less_tip2) + "</font>");
+					msgTip.append("<font color='#f8ab00'>" + balance + getString(R.string.prize_ld) + "</font><br/>");
+					msgTip.append("<font color='#000000'>" + getString(R.string.exit_app_ld_less_tip3) + "</font>");
+
+					new CustomLdDialog(mContext, null, Html.fromHtml(msgTip.toString()), getString(R.string.exit), getString(R.string.go_makemoney),
+							new OnClickListener()
+							{
+								public void onClick(View arg0)
+								{
+									moveTaskToBack(true);
+								}
+							}, new OnClickListener()
+							{
+								public void onClick(View arg0)
+								{
+									onToOtherFragment(2, false);
+								}
+							}).show();
+				}
+				else
+				{
+					mMoveBackToast = Toast.makeText(mContext, mContext.getString(R.string.repress_exit) + getString(R.string.app_name), Toast.LENGTH_LONG);
+					mMoveBackToast.setGravity(Gravity.CENTER, 0, 0);
+					mMoveBackToast.show();
+					Timer timer = new Timer();
+					timer.schedule(new TimerTask()
+					{
+						public void run()
+						{
+							mExitCnt = 0;
+						}
+					}, 3000);
+				}
+
+				return true;
+			}
+			else if (2 == mExitCnt)
+			{
+				if (null != mMoveBackToast)
+				{
+					mMoveBackToast.cancel();
+					mMoveBackToast = null;
+				}
+				mExitCnt = 0;
+				moveTaskToBack(true);
+				GlobalData.getInstance().clear();
+				finish();
+			}
+			return true;
+		}
+
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public void onToOtherFragment(int index, boolean checkAds)
+	{
+		if (checkAds)
+		{
+			GlobalData.mCheckAds = true;
+		}
+		if (index != currentTab)
+		{
+			// initTab(index);
+			if (index == 0)
+			{
+				((RadioButton) (main_radiogroup.findViewById(R.id.tab_search_wifi))).setChecked(true);
+			}
+			else if (index == 1)
+			{
+				((RadioButton) (main_radiogroup.findViewById(R.id.tab_forum_bbs))).setChecked(true);
+			}
+			else if (index == 2)
+			{
+				((RadioButton) (main_radiogroup.findViewById(R.id.tab_download))).setChecked(true);
+			}
+			else if (index == 3)
+			{
+				((RadioButton) (main_radiogroup.findViewById(R.id.tab_mine_space))).setChecked(true);
+			}
+		}
+	}
+
+	public void onActivityResult(final int requestCode, final int resultCode, final Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		initHandler();
+		doWork(new HandlerWorkInterface()
+		{
+			public void onFinish()
+			{
+				switch (requestCode)
+				{
+				case UiResultCode.REQUST_CODE_UPHEAD:
+					if (resultCode == UiResultCode.RESULT_CODE_UPHEAD)
+					{
+						Intent intent1 = new Intent();
+						intent1.setAction(GlobalData.MODIFY_USER_ICON);
+						LocalBroadcastManager.getInstance(WifiApplication.getInstance()).sendBroadcast(intent1);
+					}
+					break;
+
+				case UiResultCode.REQUST_CODE_MFY_INFO:
+				{
+					Intent intent1 = new Intent();
+					intent1.setAction(GlobalData.MODIFY_USER_MSG);
+					LocalBroadcastManager.getInstance(WifiApplication.getInstance()).sendBroadcast(intent1);
+
+					break;
+				}
+
+				case UiResultCode.REQUST_CODE_SYSMSG:
+				{
+					Intent intent1 = new Intent();
+					intent1.setAction(GlobalData.READ_SYSTEM_MSG);
+					LocalBroadcastManager.getInstance(WifiApplication.getInstance()).sendBroadcast(intent1);
+
+					break;
+				}
+				case UiResultCode.REQUST_CODE_FORUM:
+					if (null == mUploadMessage) return;
+					Uri result = (data == null || resultCode != RESULT_OK) ? null : data.getData();
+					// 接收选中的文件路径
+					mUploadMessage.onReceiveValue(result);
+					mUploadMessage = null;
+					break;
+
+				case UiResultCode.REQUST_CODE_WEBVIEW_ADS:
+					break;
+				case UiResultCode.REQUST_CODE_WEBVIEW_LD_TIP:
+					mGetCfgInfoFlag = false;
+					getCfgInfoReq();
+					break;
+				case UiResultCode.REQUST_CODE_EXCH_TIME:
+					if (1 == resultCode)
+					{
+						onToOtherFragment(2, false);
+					}
+				case UiResultCode.RESULT_CODE_VDPLAY_BACK:
+					if (1 == resultCode)
+					{
+						onToOtherFragment(2, false);
+					}
+					else if (2 == resultCode)
+					{
+						onToOtherFragment(0, false);
+					}
+				}
+			}
+		});
+	}
+
+	@Override
+	public void onSetValueCallback(ValueCallback<Uri> uploadMessage)
+	{
+		// TODO Auto-generated method stub
+		mUploadMessage = uploadMessage;
+
+	}
+
+	private boolean showRegisterTip()
+	{
+		int isRegister = PreferencesUtil.getInstance().getInt(PreferencesColum.ISREGISTER);
+		if (0 == isRegister) return false;
+		PreferencesUtil.getInstance().putInt(PreferencesColum.ISREGISTER, 0);
+		StringBuffer msg = new StringBuffer();
+
+		msg.append("<font color='#000000'>" + getString(R.string.register_sec_msg_tip1) + "</font>");
+		msg.append("<font color='#ff0000'>" + "3" + "</font>");
+		msg.append("<font color='#000000'>" + getString(R.string.register_sec_msg_tip2) + "</font>");
+
+		new RegSecDialog(mContext, getString(R.string.register_sec_tip), Html.fromHtml(msg.toString()),
+
+		new View.OnClickListener()
+		{
+			public void onClick(View v)
+			{
+				doWork(new HandlerWorkInterface()
+				{
+					public void onFinish()
+					{
+						// checkOtherTip();
+					}
+				});
+			}
+		},
+
+		new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				doWork(new HandlerWorkInterface()
+				{
+					public void onFinish()
+					{
+						WebviewNode mWebNode = new WebviewNode();
+						mWebNode.titleName = getString(R.string.how_makemoney);
+						mWebNode.url = WifiApplication.getInstance().getBeanUrl();
+						mWebNode.webType = WebviewNode.WEB_TYPE_HOW_MAKEMONEY;
+
+						Bundle extra1 = new Bundle();
+						extra1.putParcelable(WebviewNode.EXTRAS_WEBVIEW_NODE, mWebNode);
+						ActivityUtil.startActivityForResult(HomeActivity.this, WebviewActivity.class, extra1, UiResultCode.REQUST_CODE_WEBVIEW_LD_TIP);
+					}
+				});
+			}
+		}).show();
+		return true;
+	}
+
+	private void deinitData()
+	{
+		OWManager.getInstance(this).unRegisterPointsChangeListener(this);
+		DynamicSdkManager.getInstance(this).onAppDestroy();
+		DiyOfferWallManager.getInstance(this).onAppExit();
+	}
+
+	private void initJPush()
+	{
+		int pushId = getIntent().getIntExtra("pushId", 0);
+		if (pushId != 0)
+		{
+			// 由push通知跳转而来
+			NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+			manager.cancel(pushId);
+			// JPushInterface.reportNotificationOpened(this,msgId+"");
+		}
+		else
+		{
+			getPushCheck();
+		}
+	}
+
+	/*
+	 * 客户端初始化push sdk后，周期上报注册终端(规定4小时)
+	 */
+	private void getPushCheck()
+	{
+		itfPushCheck = new ItfPushCheck(HomeActivity.this, new CallBackInterface()
+		{
+			@Override
+			public void onSuccess(Object obj)
+			{
+				// TODO Auto-generated method stub
+				LogUtil.d(this, "JPushCheckSuccess");
+				System.out.println("Success");
+			}
+
+			@Override
+			public void onFailed(int retCode)
+			{
+				// TODO Auto-generated method stub
+				LogUtil.d(this, "JPushCheckFailed");
+				System.out.println("Failed");
+			}
+		});
+
+		timer = new Timer();
+		timerTask = new TimerTask()
+		{
+			@Override
+			public void run()
+			{
+				// TODO Auto-generated method stub
+				registration = JPushInterface.getRegistrationID(HomeActivity.this);
+				if (registration != null && registration.length() > 0){
+					itfPushCheck.doRequst(registration);
+				}
+			}
+		};
+		timer.schedule(timerTask, 1000 * 10, 1000 * 60 * 60 * 4);
+	}
+
+	private void initData()
+	{
+		MobclickAgent.updateOnlineConfig(mContext);
+		/*
+		 * if (!showRegisterTip()) { getCfgInfoReq(); }
+		 */
+
+		// 请务必调用以下代码，告诉积分墙源数据SDK应用启动，可以让SDK进行一些初始化操作。该接口务必在SDK的初始化接口之后调用。
+		DiyOfferWallManager.getInstance(this).onAppLaunch();
+		// （可选）注册积分监听-随时随地获得积分的变动情况
+		OWManager.getInstance(this).registerPointsChangeListener(this);
+		int accountId = ReadFile.getInstance().getIntKeyValue(PreferencesColum.ACCOUNTID);
+		OWManager.getInstance(this).setCustomUserId(accountId + "_3");
+
+		/*
+		 * new Thread(new Runnable() {
+		 * 
+		 * @Override public void run() { PushAgent mPushAgent =
+		 * PushAgent.getInstance(mContext); try {
+		 * mPushAgent.getTagManager().add("entered"); } catch (Exception e) {
+		 * LogUtil.w("umeng message error ", e); } } }).start();
+		 */
+	}
+
+	private boolean mGetCfgInfoFlag = false;
+	private ItfGetCfgInfo mGetCfgInfoReq;
+
+	private void getCfgInfoReq()
+	{
+		if (mGetCfgInfoFlag) return;
+
+		if (null == mGetCfgInfoReq)
+		{
+			mGetCfgInfoReq = new ItfGetCfgInfo(new CallBackInterface()
+			{
+
+				@Override
+				public void onSuccess(Object obj)
+				{
+					mGetCfgInfoFlag = true;
+				}
+
+				@Override
+				public void onFailed(int retCode)
+				{
+
+				}
+			});
+		}
+		mGetCfgInfoReq.doRequst();
+	}
+
+	@Override
+	public void onPointBalanceChange(int balance)
+	{
+		GlobalData.getInstance().isupdate = true;
+		if (balance > 0)
+		{
+			ToastUtil.show(mContext, String.format(getString(R.string.task_complete_award), NumberUtil.parseMoney(balance)), Toast.LENGTH_LONG);
+			PreferencesUtil.getInstance().putString("HAS_COMPLETE_TASK", DateUtil.getDateString(System.currentTimeMillis(), DateUtil.PATTERN_YMD));
+			setDwRadioAlarm();
+		}
+	}
+
+	@Override
+	public void onClick(View v)
+	{
+
+	}
+}

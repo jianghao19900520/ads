@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ConfigureProjectWizard">
+		<item value="org.tigris.subversion.subclipse.ui.SharingWizard" key="selectedWizardId"/>
+	</section>
+	<section name="SynchronizeViewSettings">
+		<item value="1451476889399" key="lastactiveparticipant_sec_id"/>
+		<item value="org.tigris.subversion.subclipse.participant" key="lastactiveparticipant_id"/>
+		<item value="false" key="linkWithEditor"/>
+		<section name="org.tigris.subversion.subclipse.participant.1448936634581">
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1450772964335">
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1449644589645">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1450686897419">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1447405563300">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1449561221980">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1451354042340">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1451476889399">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1449713114729">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1448436423338">
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1449627952478">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1450421011426">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1448437687884">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1450785169686">
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1449560147228">
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1450183718241">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1448435811755">
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1450315398809">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1448435725551">
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1449742486870">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1448436656059">
+		</section>
+		<section name="org.tigris.subversion.subclipse.participant.1448938361316">
+			<item value="org.eclipse.team.ui.modelprovider_compressedfolders" key="org.eclipse.team.ui.P_LAST_MODELPROVIDER"/>
+			<item value="false" key="org.eclipse.team.ui.P_COMMIT_SET_ENABLED"/>
+		</section>
+	</section>
+</section>

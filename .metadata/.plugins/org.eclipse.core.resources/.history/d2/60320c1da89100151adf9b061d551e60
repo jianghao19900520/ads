@@ -1,0 +1,80 @@
+package com.utils;
+
+public class CFG
+{
+	/** 是否调试 */
+	public static final boolean DEBUG = false;
+	/** 接口使用切换 */
+	public static final boolean isOnline = true;
+
+	public static final boolean isLogcat = true;
+	public static final boolean isLogPutFile = true;
+	public static final boolean isRemoveAllCfg = false;
+	public static final boolean isCountlySubmit = true;
+
+	static
+	{
+		if (!isOnline)
+		{
+			VIDEO_DOMAIN1 = "192.168.1.22:8001";
+			DOMAIN1 = "192.168.1.22:8001";
+			DOMAIN2 = "/ws/terminal/";
+			DOMAIN3 = "/ws/partner/";
+		}
+		else
+		{
+			VIDEO_DOMAIN1 = "magicwifi.com.cn";
+			DOMAIN1 = "magicwifi.com.cn";
+			DOMAIN2 = "/ws/terminal/";
+			DOMAIN3 = "/ws/partner/";
+		}
+	}
+
+	public static final int CONSUME_DAY_NEDD_LD = 40;
+	public static final String TAG = "xixi";
+	public static final String LOG_TAG = "magicwifi";
+	public static final String LOG_TAG_WIFI = "wifi";
+	public static final String LOG_TAG_HTTP = "http";
+	public static final String LOG_TAG_VIDEO = "video";
+	public static final String LOG_TAG_TV = "tv";
+	public static final String LOG_TAG_CONNECT = "connect";
+
+	public static final String PREFERENCES_NAME = "magicwifi";
+	public static final String SCARD_FILE_PATH = "/MagicWifi/";
+	public static final int CHECK_SWR_CONTIMER_PERIOD = 1 * 60 * 1000;
+	public static final int WAIT_WIFI_DISCONNECTED_NEXT = 10 * 1000;
+
+	public static final int EXCHANGE_RATE = 1000;
+
+	/* HTTP */
+	public static final int HTTP_REQ_WDONG_TIME = 10 * 1000;
+	public static final int HTTP_TIMEOUT_POOL = 1000;
+	public static final int HTTP_TIMEOUT_CONNECTION = 5 * 1000;
+	public static final int HTTP_TIMEOUT_SO = 5 * 1000;
+	public static final int HTTP_SLEEP_TIME = 500;
+	public static final int HTTP_RETRY_CNT_MAX = 3;
+	public static final int SERVICE_AUTH_PREIOD = 30 * 1000;
+	/* end HTTP */
+
+	public static final int MAX_LOG_FILE_SIZE = 2 * 1024 * 1024;
+
+	public static String VIDEO_DOMAIN1;
+	public static String DOMAIN1;
+	public static String DOMAIN2;
+	public static String DOMAIN3;
+	public static String IP;
+	public static final String[] SERVER_URL_ARRAY = { "http://" + DOMAIN1 + DOMAIN2 };
+	public static final String[] VIDEO_SERVER_URL_ARRAY = { "http://" + VIDEO_DOMAIN1 + DOMAIN2 };
+	public static final String[] PARTNER_URL_ARRAY = { "http://" + DOMAIN1 + DOMAIN3 };
+
+	public static final String BEAD_HELP_URL = "http://" + DOMAIN1 + "/ws/terminal/faq/getAnswer?id=81";
+	public static final String MORE_HELP_URL = "http://" + DOMAIN1 + "/ws/terminal/faq/getQuestions?";
+	public static final String BBS_HELP_URL = "http://magicwifi.com.cn/bbs/index";
+
+	public static final String INVIT_SMS_DL_URL = "http://dwz.cn/E53lQ";
+
+	public static final int ITF_CHECK_NETWORK_CODE = 21;
+	public static final int ITF_GET_CITY_CODE = 22;
+	public static final int ITF_GET_CONNECT_AUTH_INFO_CODE = 23;
+
+}

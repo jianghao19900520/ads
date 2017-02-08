@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="248dp"
+        android:layout_height="150dp"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:text="每天领取次数有限，摇到满意的奖品再领取哦！"
+            android:textColor="#666666"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/shake_frist_btn"
+            android:layout_width="112dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/home_scan_auto_btn_style"
+            android:gravity="center"
+            android:text="知道了"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="#f5f6f8"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="66dp"
+        android:layout_height="match_parent" >
+        
+        <ImageView 
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/wifi_enabled_small"/>
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        
+        <TextView 
+            android:id="@+id/jpush_notification_download_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="我是自定义的 title"
+            android:textColor="#00acf1"
+            android:textSize="15sp"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+        
+        <TextView 
+            android:id="@+id/jpush_notification_download_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是自定义的 content"
+            android:textColor="#838481"
+            android:textSize="11sp"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+        
+    </LinearLayout>
+
+</LinearLayout>

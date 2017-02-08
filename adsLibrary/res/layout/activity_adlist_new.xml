@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <WebView
+        android:id="@+id/webview_ad"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/adlist_bg"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <ImageView
+                android:id="@+id/adlist_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/title_back_n" />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/adlist_title" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/random_btn"
+            android:layout_width="321dp"
+            android:layout_height="178dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/adlist_wk_bg" />
+
+        <ImageView
+            android:id="@+id/shake_btn"
+            android:layout_width="321dp"
+            android:layout_height="178dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="14dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/adlist_yyy_bg" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,89 @@
+package com.jianghao.myjpush;
+
+import cn.jpush.android.api.BasicPushNotificationBuilder;
+import cn.jpush.android.api.CustomPushNotificationBuilder;
+import cn.jpush.android.api.JPushInterface;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+
+private NotificationManager notificationManager = null;
+private Notification notification = null;
+private RemoteViews contentView = null;
+private boolean isRecording = false;
+
+public class MyReceiver extends BroadcastReceiver
+{
+
+	private static final String TAG = "MyReceiver";
+	
+	@Override
+	public void onReceive(Context context, Intent intent)
+	{
+		// TODO Auto-generated method stub
+		Bundle bundle = intent.getExtras();
+        if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
+            Log.i(TAG, "JPush用户注册成功");
+        } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent
+                .getAction())) {
+            Log.i(TAG, "接受到推送下来的自定义消息");
+            receivingNotification(context, bundle);
+        } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent
+                .getAction())) {
+            Log.i(TAG, "接受到推送下来的通知");
+ 
+        } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent
+                .getAction())) {
+            Log.i(TAG, "用户点击打开了通知");
+//            openNotification(context, bundle);
+        }
+	}
+	
+	private void receivingNotification(Context context, Bundle bundle) {
+//	    NotificationManager manager = (NotificationManager) context
+//	            .getSystemService(Context.NOTIFICATION_SERVICE);
+//	    String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+//	    String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+//	    // 使用notification
+//	    // 使用广播或者通知进行内容的显示
+//	    NotificationCompat.Builder builder = new NotificationCompat.Builder(
+//	            context);
+//	    builder.setContentText(message).setSmallIcon(R.drawable.ic_launcher).setContentTitle(JPushInterface.EXTRA_TITLE);
+//	    builder.setDefaults(Notification.DEFAULT_SOUND);
+//	    manager.notify(1,builder.build());
+		
+		 notificationManager = (NotificationManager) this
+				    .getSystemService(Context.NOTIFICATION_SERVICE);
+				   Resources res = this.getResources();
+				   long when = System.currentTimeMillis();
+				   notification =new Notification(R.drawable.ic_launcher_soundrecorder,
+				    res.getString(R.string.wld_recording_start), when);
+				   notification.flags = Notification.FLAG_ONGOING_EVENT;
+				   
+				   contentView = new RemoteViews(this.getPackageName(),
+				     R.layout.notify_view);//初始化自定义的通知样式
+				   contentView.setImageViewResource(R.id.notify_image, R.drawable.ic_launcher_soundrecorder);
+				   contentView.setTextViewText(R.id.notify_name,
+
+				         res.getString(R.string.wld_recording_now));//录音中
+				   contentView.setTextViewText(R.id.notify_time, "00:00");//录音时长
+				   
+				   notification.contentView = contentView;//设置通知样式为自定义的样式
+				   
+				   Intent notificationIntent =new Intent(SoundRecorder.this, SoundRecorder.class);
+				   notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				   
+				   PendingIntent contentItent = PendingIntent.getActivity(this, 0,
+				    notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+				   
+				   notification.contentIntent = contentItent;
+				   notificationManager.notify(0, notification);
+	}
+
+}
