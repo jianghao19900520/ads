@@ -15,7 +15,7 @@ public class MainActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		AdManager.getInstance().openAd(this, "123456", true);
+		AdManager.getInstance().openAd(this, "123456", true);//test
 	}
 
 }
